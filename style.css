@@ -1,0 +1,140 @@
+* {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .signup-body-black {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+  }
+  
+  /* Card with glowing box shadow */
+  .signup-card-black {
+    width: 380px;
+    padding: 40px 35px;
+    background: #111;
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+    animation: fadeSlide 1s ease;
+    color: white;
+    transition: 0.3s;
+  }
+  
+  /* Hover glow effect */
+  .signup-card-black:hover {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Titles */
+  .title-black {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .subtitle-black {
+    text-align: center;
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 25px;
+  }
+  
+  /* Input Fields */
+  .form-group-custom {
+    position: relative;
+    margin-bottom: 22px;
+  }
+  
+  .form-group-custom input {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #444;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+  }
+  
+  .form-group-custom input:focus {
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  }
+  
+  .form-group-custom label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+    pointer-events: none;
+    transition: 0.3s ease;
+  }
+  
+  /* Floating Labels */
+  .form-group-custom input:focus + label,
+  .form-group-custom input:not(:placeholder-shown) + label {
+    top: -10px;
+    background: #111;
+    padding: 0 5px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 4px;
+  }
+  
+  /* Button */
+  .btn-animated-black {
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-animated-black:hover {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+  }
+  
+  .btn-animated-black:active {
+    transform: scale(0.96);
+  }
+  
+  /* Login Text */
+  .login-text-black {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+  }
+  
+  .login-text-black a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  
+  /* Animation */
+  @keyframes fadeSlide {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .start-card{
+    color: white;
+  }
+
+  .home-card{
+    color: white;
+  }

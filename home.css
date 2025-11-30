@@ -1,0 +1,63 @@
+/* Home Page Quiz Start Card */
+body{
+    background-color: rgb(27, 25, 25);
+    margin: 0;
+    padding: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;   /* horizontally center */
+    align-items: center;       /* vertically center */
+    height: 100vh
+    
+}
+
+.home-card {
+    width: 420px;
+    padding: 40px;
+    background: #111;
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.12);
+    color: white;
+    text-align: center;
+    animation: fadeSlide 1s ease;
+  }
+  
+  .home-card:hover {
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.18);
+  }
+  
+  /* Text */
+  .home-title {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  
+  .home-subtitle {
+    font-size: 15px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+  
+  /* Start Quiz Button (same style as before) */
+  .btn-start-quiz {
+    width: 100%;
+    padding: 14px;
+    background: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-start-quiz:hover {
+    box-shadow: 0 0 28px white(0, 255, 157, 0.6);
+    transform: translateY(-3px);
+  }
+  
+  .btn-start-quiz:active {
+    transform: scale(0.96);
+  }
+  

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="signup-body-black">
+
+  <div class="start-card animate-card">
+    <h2 class="home-title">Admin Login</h2>
+    <p class="home-subtitle">Enter admin credentials</p>
+
+    <div class="form-group-custom">
+      <input type="text" id="adminUser" required>
+      <label>Username</label>
+    </div>
+
+    
+    <div class="form-group-custom">
+        <input type="email" id="adminMail" required>
+        <label>E-mail</label>
+      </div>
+
+    <div class="form-group-custom">
+      <input type="password" id="adminPass" required>
+      <label>Password</label>
+    </div>
+
+    <button class="btn-start-quiz" onclick="adminLogin()">Login</button>
+
+    <p class="login-text-black" style="margin-top:15px;">
+      <a href="index.html">Back to User Login</a>
+    </p>
+  </div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>

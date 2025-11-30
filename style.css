@@ -14,24 +14,25 @@
   .signup-card-black {
     width: 380px;
     padding: 40px 35px;
-    background: #111;
     border-radius: 18px;
+    background: #111;
     box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
     animation: fadeSlide 1s ease;
     color: white;
     transition: 0.3s;
   }
   
-  /* Hover glow effect */
-  .signup-card-black:hover {
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
-  }
+  
   
   /* Titles */
   .title-black {
     font-size: 28px;
     font-weight: 600;
     text-align: center;
+  }
+  /* Hover glow effect */
+  .signup-card-black:hover {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
   }
   
   .subtitle-black {

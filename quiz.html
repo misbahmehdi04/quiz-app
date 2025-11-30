@@ -1,98 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Quiz</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+<body>
+  <div id="timer">10:00</div>
 
-<body class="signup-body-black">
+  <script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-  <div class="quiz-container">
-    <div class="quiz-timer">
-      <h3 id="timer">05:00</h3>
-    </div>
+  const supabase = createClient(
+  'https://qpfmuqdhsoyhremaxjik.supabase.co',
+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwZm11cWRoc295aHJlbWF4amlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0Mzc1MDMsImV4cCI6MjA4MDAxMzUwM30.OcHj8FDHUuAwzOkPxWIqCmbmonjZl7TblRryylrKXP0'
+  );
 
-    <div class="quiz-card animate-card">
-      <h2 class="quiz-title">Start Quiz</h2>
+  let timeLeft = 600; // 10 minutes in seconds
 
-      <div id="questionText" class="quiz-question">Loading question...</div>
+  let timerInterval = setInterval(() => {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
 
-      <div class="quiz-options">
-        <button class="quiz-option" id="option1">Option 1</button>
-        <button class="quiz-option" id="option2">Option 2</button>
-        <button class="quiz-option" id="option3">Option 3</button>
-        <button class="quiz-option" id="option4">Option 4</button>
-      </div>
+    document.getElementById("timer").textContent =
+      `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 
-      <button id="nextBtn" class="btn-next" onclick="nextQuestion()">Next Question</button>
-    </div>
-  </div>
-
-  <script>
-    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-    const SUPABASE_KEY = 'YOUR_SUPABASE_KEY';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    let currentQuestionIndex = 0;
-    let selectedOption = null;
-    const questions = [];
-    let timer;
-    let timeLeft = 300; // 5 minutes in seconds
-
-    // Fetch questions from Supabase
-    async function loadQuestions() {
-      const { data, error } = await supabase.from("questions").select("*");
-      if (error) {
-        alert("Error loading questions");
-        return;
-      }
-      questions.push(...data);
-      displayQuestion(currentQuestionIndex);
-      startTimer();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      alert("⏳ Time's up! Submitting quiz...");
+      submitQuiz();
     }
 
-    function displayQuestion(index) {
-      const question = questions[index];
-      document.getElementById("questionText").textContent = question.question;
-      document.getElementById("option1").textContent = question.option_a;
-      document.getElementById("option2").textContent = question.option_b;
-      document.getElementById("option3").textContent = question.option_c;
-      document.getElementById("option4").textContent = question.option_d;
+    timeLeft--;
+  }, 1000);
+
+  async function loadQuestions() {
+    const { data, error } = await supabase.from("questions").select("*");
+
+    if (error) {
+      console.error("Error loading questions:", error);
+      return;
     }
 
-    // Timer countdown function
-    function startTimer() {
-      timer = setInterval(() => {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        document.getElementById("timer").textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-        
-        if (timeLeft === 0) {
-          clearInterval(timer);
-          alert("Time is up! The quiz is now finished.");
-          // Automatically submit quiz or show results
-        } else {
-          timeLeft--;
-        }
-      }, 1000);
-    }
+    displayQuestions(data);
+  }
 
-    // Handle next question
-    function nextQuestion() {
-      currentQuestionIndex++;
-      if (currentQuestionIndex < questions.length) {
-        displayQuestion(currentQuestionIndex);
-      } else {
-        alert("Quiz completed!");
-        clearInterval(timer);
-      }
-    }
+  function displayQuestions(questions) {
+    let container = document.getElementById("quiz-box");
+    container.innerHTML = "";
 
-    loadQuestions(); // Initial load of questions
-  </script>
+    questions.forEach((q, index) => {
+      container.innerHTML += `
+        <div class="quiz-card">
+          <h3>${index + 1}. ${q.question}</h3>
+          <label><input type="radio" name="q${q.id}" value="${q.option1}"> ${q.option1}</label><br>
+          <label><input type="radio" name="q${q.id}" value="${q.option2}"> ${q.option2}</label><br>
+          <label><input type="radio" name="q${q.id}" value="${q.option3}"> ${q.option3}</label><br>
+          <label><input type="radio" name="q${q.id}" value="${q.option4}"> ${q.option4}</label><br>
+        </div>
+      `;
+    });
+  }
+
+  loadQuestions();
+</script>
 
 </body>
 </html>

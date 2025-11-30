@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="addques.css">
+<body>
+    <div class="form-wrapper">
+  <div class="form-card">
+    <h1 class="title">Add Question</h1>
+    <p class="subtitle">Create a new MCQ for the quiz</p>
+
+    <form id="addQuestionForm">
+
+      
+
+      <label>Question</label>
+      <textarea id="questionText" rows="3" placeholder="Write your question..." required></textarea>
+
+      <label>Option A</label>
+      <input type="text" id="optionA" placeholder="Option A" required>
+
+      <label>Option B</label>
+      <input type="text" id="optionB" placeholder="Option B" required>
+
+      <label>Option C</label>
+      <input type="text" id="optionC" placeholder="Option C" required>
+
+      <label>Option D</label>
+      <input type="text" id="optionD" placeholder="Option D" required>
+
+      <label>Correct Answer</label>
+      <input type="text" id="correctAnswer" placeholder="Correct Option (A/B/C/D)" required>
+
+      <button type="submit" class="submit-btn">Add Question</button>
+
+      <p id="msg" class="message"></p>
+    </form>
+  </div>
+</div>
+
+  <script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+ const supabase = createClient(
+  'https://qpfmuqdhsoyhremaxjik.supabase.co',
+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwZm11cWRoc295aHJlbWF4amlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0Mzc1MDMsImV4cCI6MjA4MDAxMzUwM30.OcHj8FDHUuAwzOkPxWIqCmbmonjZl7TblRryylrKXP0'
+  );
+
+  document.getElementById("addQuestionForm").addEventListener("submit", addQuestion);
+
+  async function addQuestion(e) {
+    e.preventDefault();
+
+    const question = document.getElementById("question").value;
+    const option1 = document.getElementById("option1").value;
+    const option2 = document.getElementById("option2").value;
+    const option3 = document.getElementById("option3").value;
+    const option4 = document.getElementById("option4").value;
+    const correct = document.getElementById("correct_option").value;
+
+    const { error } = await supabase.from("questions").insert([
+      {
+        question,
+        option1,
+        option2,
+        option3,
+        option4,
+        correct_option: correct
+      }
+    ]);
+
+    if (error) {
+      alert("❌ Error adding question: " + error.message);
+    } else {
+      alert("✅ Question Added Successfully!");
+      e.target.reset();
+    }
+  }
+
+
+
+</script>
+</body>
+</html>
